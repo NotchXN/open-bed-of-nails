@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "repair_comparison",
+  "provenance": "simulated",
+  "board": {
+    "model": "DEMO-CTRL",
+    "revision": "A",
+    "serial_number": "DEMO-0001"
+  },
+  "recipe_sha256": "7540932712ff86f3af7051bc8656eecdb90f7135ed3a0e22599b914631635c4b",
+  "outcome": "PASS_ON_RETEST",
+  "before_run_id": "24898b40-c0c5-4a24-a149-107c0b7ac63f",
+  "after_run_id": "b9b8e174-cd73-47a6-8a4e-6cf3c51348fe",
+  "cleared_failures": [
+    "rail_3v3"
+  ],
+  "new_failures": [],
+  "changes": [
+    {
+      "test_id": "ground_continuity",
+      "label": "Ground return continuity",
+      "unit": "ohm",
+      "before_status": "PASS",
+      "after_status": "PASS",
+      "before_value": 0.18,
+      "after_value": 0.18
+    },
+    {
+      "test_id": "supply_isolation",
+      "label": "Supply-to-ground isolation signature",
+      "unit": "ohm",
+      "before_status": "PASS",
+      "after_status": "PASS",
+      "before_value": 18000.0,
+      "after_value": 18000.0
+    },
+    {
+      "test_id": "supply_current",
+      "label": "Powered supply current",
+      "unit": "mA",
+      "before_status": "PASS",
+      "after_status": "PASS",
+      "before_value": 38.4,
+      "after_value": 38.4
+    },
+    {
+      "test_id": "rail_5v",
+      "label": "5 V rail",
+      "unit": "V",
+      "before_status": "PASS",
+      "after_status": "PASS",
+      "before_value": 5.01,
+      "after_value": 5.01
+    },
+    {
+      "test_id": "rail_3v3",
+      "label": "3.3 V rail",
+      "unit": "V",
+      "before_status": "FAIL",
+      "after_status": "PASS",
+      "before_value": 0.08,
+      "after_value": 3.29
+    },
+    {
+      "test_id": "gpio_high",
+      "label": "Logic buffer high output",
+      "unit": "V",
+      "before_status": "UNTESTED",
+      "after_status": "PASS",
+      "before_value": null,
+      "after_value": 3.26
+    },
+    {
+      "test_id": "gpio_low",
+      "label": "Logic buffer low output",
+      "unit": "V",
+      "before_status": "UNTESTED",
+      "after_status": "PASS",
+      "before_value": null,
+      "after_value": 0.04
+    },
+    {
+      "test_id": "uart_loopback",
+      "label": "Diagnostic UART echo",
+      "unit": "bool",
+      "before_status": "UNTESTED",
+      "after_status": "PASS",
+      "before_value": null,
+      "after_value": 1.0
+    }
+  ]
+}

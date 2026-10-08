@@ -1,0 +1,719 @@
+{
+  "schema_version": 1,
+  "tool_version": "0.1.1",
+  "run_id": "0919033f-e0e5-4ea4-ae5f-e25e131e8c8b",
+  "started_at": "2026-10-08T15:47:10.548923+00:00",
+  "ended_at": "2026-10-08T15:47:10.549238+00:00",
+  "provenance": "simulated",
+  "scenario": "healthy",
+  "board": {
+    "model": "DEMO-CTRL",
+    "revision": "A",
+    "serial_number": "DEMO-FAULT-001"
+  },
+  "operator": "Bench operator",
+  "fixture_id": "SIM-FIXTURE-01",
+  "recipe": {
+    "id": "demo-controller",
+    "version": "1.0.0",
+    "sha256": "7540932712ff86f3af7051bc8656eecdb90f7135ed3a0e22599b914631635c4b",
+    "snapshot": {
+      "schema_version": 1,
+      "id": "demo-controller",
+      "version": "1.0.0",
+      "board_model": "DEMO-CTRL",
+      "board_revision": "A",
+      "description": "Synthetic 5 V logic board for software demonstrations; not an actual PCB specification",
+      "power": {
+        "voltage_v": 5.0,
+        "current_limit_ma": 100.0
+      },
+      "test_points": [
+        {
+          "id": "TP01",
+          "net": "VIN_5V",
+          "x_mm": 10,
+          "y_mm": 10
+        },
+        {
+          "id": "TP02",
+          "net": "GND",
+          "x_mm": 20,
+          "y_mm": 10
+        },
+        {
+          "id": "TP03",
+          "net": "GND_RETURN",
+          "x_mm": 30,
+          "y_mm": 10
+        },
+        {
+          "id": "TP04",
+          "net": "RAIL_5V",
+          "x_mm": 40,
+          "y_mm": 10
+        },
+        {
+          "id": "TP05",
+          "net": "RAIL_3V3",
+          "x_mm": 10,
+          "y_mm": 20
+        },
+        {
+          "id": "TP06",
+          "net": "RESET",
+          "x_mm": 20,
+          "y_mm": 20
+        },
+        {
+          "id": "TP07",
+          "net": "BUFFER_OUT",
+          "x_mm": 30,
+          "y_mm": 20
+        },
+        {
+          "id": "TP08",
+          "net": "LED_OUT",
+          "x_mm": 40,
+          "y_mm": 20
+        },
+        {
+          "id": "TP09",
+          "net": "ANALOG_IN",
+          "x_mm": 10,
+          "y_mm": 30
+        },
+        {
+          "id": "TP10",
+          "net": "BUFFER_IN",
+          "x_mm": 20,
+          "y_mm": 30
+        },
+        {
+          "id": "TP11",
+          "net": "UART_TX",
+          "x_mm": 30,
+          "y_mm": 30
+        },
+        {
+          "id": "TP12",
+          "net": "UART_RX",
+          "x_mm": 40,
+          "y_mm": 30
+        },
+        {
+          "id": "TP13",
+          "net": "I2C_SCL",
+          "x_mm": 10,
+          "y_mm": 40
+        },
+        {
+          "id": "TP14",
+          "net": "I2C_SDA",
+          "x_mm": 20,
+          "y_mm": 40
+        },
+        {
+          "id": "TP15",
+          "net": "SWD_CLK",
+          "x_mm": 30,
+          "y_mm": 40
+        },
+        {
+          "id": "TP16",
+          "net": "SWD_IO",
+          "x_mm": 40,
+          "y_mm": 40
+        }
+      ],
+      "tests": [
+        {
+          "id": "ground_continuity",
+          "label": "Ground return continuity",
+          "phase": "unpowered",
+          "method": "resistance",
+          "points": [
+            "TP02",
+            "TP03"
+          ],
+          "unit": "ohm",
+          "min": 0,
+          "max": 1,
+          "on_fail": "stop",
+          "settle_ms": 50
+        },
+        {
+          "id": "supply_isolation",
+          "label": "Supply-to-ground isolation signature",
+          "phase": "unpowered",
+          "method": "resistance",
+          "points": [
+            "TP01",
+            "TP02"
+          ],
+          "unit": "ohm",
+          "min": 1000,
+          "max": 1000000,
+          "on_fail": "stop",
+          "settle_ms": 50
+        },
+        {
+          "id": "supply_current",
+          "label": "Powered supply current",
+          "phase": "powered",
+          "method": "current",
+          "points": [
+            "TP01",
+            "TP02"
+          ],
+          "unit": "mA",
+          "min": 10,
+          "max": 80,
+          "on_fail": "stop",
+          "depends_on": [
+            "ground_continuity",
+            "supply_isolation"
+          ],
+          "settle_ms": 50
+        },
+        {
+          "id": "rail_5v",
+          "label": "5 V rail",
+          "phase": "powered",
+          "method": "voltage",
+          "points": [
+            "TP04",
+            "TP02"
+          ],
+          "unit": "V",
+          "min": 4.75,
+          "max": 5.25,
+          "on_fail": "continue",
+          "depends_on": [
+            "supply_current"
+          ],
+          "settle_ms": 50
+        },
+        {
+          "id": "rail_3v3",
+          "label": "3.3 V rail",
+          "phase": "powered",
+          "method": "voltage",
+          "points": [
+            "TP05",
+            "TP02"
+          ],
+          "unit": "V",
+          "min": 3.135,
+          "max": 3.465,
+          "on_fail": "continue",
+          "depends_on": [
+            "rail_5v"
+          ],
+          "settle_ms": 50
+        },
+        {
+          "id": "gpio_high",
+          "label": "Logic buffer high output",
+          "phase": "functional",
+          "method": "voltage",
+          "points": [
+            "TP07",
+            "TP02"
+          ],
+          "unit": "V",
+          "min": 2.8,
+          "max": 3.5,
+          "on_fail": "continue",
+          "depends_on": [
+            "rail_3v3"
+          ],
+          "stimulus": {
+            "kind": "gpio",
+            "point": "TP10",
+            "level": 1
+          },
+          "settle_ms": 50
+        },
+        {
+          "id": "gpio_low",
+          "label": "Logic buffer low output",
+          "phase": "functional",
+          "method": "voltage",
+          "points": [
+            "TP07",
+            "TP02"
+          ],
+          "unit": "V",
+          "min": 0,
+          "max": 0.4,
+          "on_fail": "continue",
+          "depends_on": [
+            "rail_3v3"
+          ],
+          "stimulus": {
+            "kind": "gpio",
+            "point": "TP10",
+            "level": 0
+          },
+          "settle_ms": 50
+        },
+        {
+          "id": "uart_loopback",
+          "label": "Diagnostic UART echo",
+          "phase": "functional",
+          "method": "uart_echo",
+          "points": [
+            "TP11",
+            "TP12"
+          ],
+          "unit": "bool",
+          "min": 1,
+          "max": 1,
+          "on_fail": "continue",
+          "depends_on": [
+            "rail_3v3"
+          ],
+          "settle_ms": 50
+        }
+      ]
+    }
+  },
+  "status": "PASS",
+  "diagnostics": [],
+  "results": [
+    {
+      "id": "ground_continuity",
+      "label": "Ground return continuity",
+      "phase": "unpowered",
+      "method": "resistance",
+      "points": [
+        "TP02",
+        "TP03"
+      ],
+      "unit": "ohm",
+      "min": 0,
+      "max": 1,
+      "value": 0.18,
+      "status": "PASS",
+      "reason": "Within inclusive limits",
+      "measured_at": "2026-10-08T15:47:10.549073+00:00"
+    },
+    {
+      "id": "supply_isolation",
+      "label": "Supply-to-ground isolation signature",
+      "phase": "unpowered",
+      "method": "resistance",
+      "points": [
+        "TP01",
+        "TP02"
+      ],
+      "unit": "ohm",
+      "min": 1000,
+      "max": 1000000,
+      "value": 18000.0,
+      "status": "PASS",
+      "reason": "Within inclusive limits",
+      "measured_at": "2026-10-08T15:47:10.549095+00:00"
+    },
+    {
+      "id": "supply_current",
+      "label": "Powered supply current",
+      "phase": "powered",
+      "method": "current",
+      "points": [
+        "TP01",
+        "TP02"
+      ],
+      "unit": "mA",
+      "min": 10,
+      "max": 80,
+      "value": 38.4,
+      "status": "PASS",
+      "reason": "Within inclusive limits",
+      "measured_at": "2026-10-08T15:47:10.549121+00:00"
+    },
+    {
+      "id": "rail_5v",
+      "label": "5 V rail",
+      "phase": "powered",
+      "method": "voltage",
+      "points": [
+        "TP04",
+        "TP02"
+      ],
+      "unit": "V",
+      "min": 4.75,
+      "max": 5.25,
+      "value": 5.01,
+      "status": "PASS",
+      "reason": "Within inclusive limits",
+      "measured_at": "2026-10-08T15:47:10.549139+00:00"
+    },
+    {
+      "id": "rail_3v3",
+      "label": "3.3 V rail",
+      "phase": "powered",
+      "method": "voltage",
+      "points": [
+        "TP05",
+        "TP02"
+      ],
+      "unit": "V",
+      "min": 3.135,
+      "max": 3.465,
+      "value": 3.29,
+      "status": "PASS",
+      "reason": "Within inclusive limits",
+      "measured_at": "2026-10-08T15:47:10.549155+00:00"
+    },
+    {
+      "id": "gpio_high",
+      "label": "Logic buffer high output",
+      "phase": "functional",
+      "method": "voltage",
+      "points": [
+        "TP07",
+        "TP02"
+      ],
+      "unit": "V",
+      "min": 2.8,
+      "max": 3.5,
+      "value": 3.26,
+      "status": "PASS",
+      "reason": "Within inclusive limits",
+      "measured_at": "2026-10-08T15:47:10.549185+00:00"
+    },
+    {
+      "id": "gpio_low",
+      "label": "Logic buffer low output",
+      "phase": "functional",
+      "method": "voltage",
+      "points": [
+        "TP07",
+        "TP02"
+      ],
+      "unit": "V",
+      "min": 0,
+      "max": 0.4,
+      "value": 0.04,
+      "status": "PASS",
+      "reason": "Within inclusive limits",
+      "measured_at": "2026-10-08T15:47:10.549208+00:00"
+    },
+    {
+      "id": "uart_loopback",
+      "label": "Diagnostic UART echo",
+      "phase": "functional",
+      "method": "uart_echo",
+      "points": [
+        "TP11",
+        "TP12"
+      ],
+      "unit": "bool",
+      "min": 1,
+      "max": 1,
+      "value": 1.0,
+      "status": "PASS",
+      "reason": "Within inclusive limits",
+      "measured_at": "2026-10-08T15:47:10.549226+00:00"
+    }
+  ],
+  "shutdown": {
+    "confirmed_off": true,
+    "errors": []
+  },
+  "actions": [
+    {
+      "at": "2026-10-08T15:47:10.549037+00:00",
+      "action": "power_off",
+      "confirmed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549042+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549045+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549049+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549052+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549055+00:00",
+      "action": "settle",
+      "requested_ms": 50,
+      "simulated": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549058+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549066+00:00",
+      "action": "measure",
+      "test_id": "ground_continuity",
+      "value": 0.18,
+      "unit": "ohm",
+      "powered": false
+    },
+    {
+      "at": "2026-10-08T15:47:10.549078+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549081+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549083+00:00",
+      "action": "settle",
+      "requested_ms": 50,
+      "simulated": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549086+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549091+00:00",
+      "action": "measure",
+      "test_id": "supply_isolation",
+      "value": 18000.0,
+      "unit": "ohm",
+      "powered": false
+    },
+    {
+      "at": "2026-10-08T15:47:10.549099+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549103+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549105+00:00",
+      "action": "power_on",
+      "voltage_v": 5.0,
+      "current_limit_ma": 100.0
+    },
+    {
+      "at": "2026-10-08T15:47:10.549107+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549110+00:00",
+      "action": "settle",
+      "requested_ms": 50,
+      "simulated": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549112+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549117+00:00",
+      "action": "measure",
+      "test_id": "supply_current",
+      "value": 38.4,
+      "unit": "mA",
+      "powered": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549124+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549127+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549129+00:00",
+      "action": "settle",
+      "requested_ms": 50,
+      "simulated": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549131+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549135+00:00",
+      "action": "measure",
+      "test_id": "rail_5v",
+      "value": 5.01,
+      "unit": "V",
+      "powered": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549142+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549144+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549146+00:00",
+      "action": "settle",
+      "requested_ms": 50,
+      "simulated": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549148+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549152+00:00",
+      "action": "measure",
+      "test_id": "rail_3v3",
+      "value": 3.29,
+      "unit": "V",
+      "powered": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549158+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549163+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549166+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549170+00:00",
+      "action": "stimulus",
+      "kind": "gpio",
+      "point": "TP10",
+      "level": 1
+    },
+    {
+      "at": "2026-10-08T15:47:10.549175+00:00",
+      "action": "settle",
+      "requested_ms": 50,
+      "simulated": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549177+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549182+00:00",
+      "action": "measure",
+      "test_id": "gpio_high",
+      "value": 3.26,
+      "unit": "V",
+      "powered": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549189+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549191+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549193+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549196+00:00",
+      "action": "stimulus",
+      "kind": "gpio",
+      "point": "TP10",
+      "level": 0
+    },
+    {
+      "at": "2026-10-08T15:47:10.549198+00:00",
+      "action": "settle",
+      "requested_ms": 50,
+      "simulated": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549201+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549205+00:00",
+      "action": "measure",
+      "test_id": "gpio_low",
+      "value": 0.04,
+      "unit": "V",
+      "powered": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549211+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549213+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549215+00:00",
+      "action": "settle",
+      "requested_ms": 50,
+      "simulated": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549218+00:00",
+      "action": "check_fixture",
+      "lid_closed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549222+00:00",
+      "action": "measure",
+      "test_id": "uart_loopback",
+      "value": 1.0,
+      "unit": "bool",
+      "powered": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549229+00:00",
+      "action": "clear_stimulus"
+    },
+    {
+      "at": "2026-10-08T15:47:10.549232+00:00",
+      "action": "power_off",
+      "confirmed": true
+    },
+    {
+      "at": "2026-10-08T15:47:10.549235+00:00",
+      "action": "close"
+    }
+  ],
+  "duration_ms": 0.337,
+  "termination": {
+    "errors": false,
+    "aborted": false
+  }
+}

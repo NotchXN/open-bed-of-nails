@@ -1,0 +1,145 @@
+[
+  {
+    "scenario": "healthy",
+    "status": "PASS",
+    "provenance": "simulated",
+    "run_id": "0919033f-e0e5-4ea4-ae5f-e25e131e8c8b",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 8,
+      "UNTESTED": 0
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "short",
+    "status": "FAIL",
+    "provenance": "simulated",
+    "run_id": "5a320048-a298-484d-befe-cf142515b591",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 1,
+      "PASS": 1,
+      "UNTESTED": 6
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "open",
+    "status": "FAIL",
+    "provenance": "simulated",
+    "run_id": "a3b97439-fc7c-4068-a38a-579d5edbc58b",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 1,
+      "PASS": 0,
+      "UNTESTED": 7
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "missing-rail",
+    "status": "FAIL",
+    "provenance": "simulated",
+    "run_id": "793ee56e-e836-4f38-9d56-16e351325e5d",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 1,
+      "PASS": 4,
+      "UNTESTED": 3
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "overcurrent",
+    "status": "FAIL",
+    "provenance": "simulated",
+    "run_id": "c50a9e0a-5dca-462f-8fa4-fcd8e266f380",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 1,
+      "PASS": 2,
+      "UNTESTED": 5
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "interlock-open",
+    "status": "ABORTED",
+    "provenance": "simulated",
+    "run_id": "91ef4cb5-6c22-41af-93f3-81971e247663",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 0,
+      "UNTESTED": 8
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "interlock-trip",
+    "status": "ABORTED",
+    "provenance": "simulated",
+    "run_id": "c8b44108-d95c-4f9c-8fad-aef837b2222b",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 3,
+      "UNTESTED": 5
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "contact-failure",
+    "status": "ABORTED",
+    "provenance": "simulated",
+    "run_id": "bda64f6a-57a7-4be1-b484-1f1f5e21236a",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 0,
+      "UNTESTED": 8
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "instrument-error",
+    "status": "ERROR",
+    "provenance": "simulated",
+    "run_id": "e3355f08-7ba7-4c66-a5ba-bfa5b0c50f94",
+    "counts": {
+      "ERROR": 1,
+      "FAIL": 0,
+      "PASS": 2,
+      "UNTESTED": 5
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "unsupported-uart",
+    "status": "INCOMPLETE",
+    "provenance": "simulated",
+    "run_id": "805ccf4f-4421-4026-9a0d-3ab504ae0026",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 7,
+      "UNTESTED": 1
+    },
+    "shutdown_confirmed": true
+  },
+  {
+    "scenario": "shutdown-error",
+    "status": "ERROR",
+    "provenance": "simulated",
+    "run_id": "2959b597-f0da-4afd-b47a-bdbbf3e2fc64",
+    "counts": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 8,
+      "UNTESTED": 0
+    },
+    "shutdown_confirmed": false
+  }
+]

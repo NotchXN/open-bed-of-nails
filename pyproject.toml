@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "open-bed-of-nails"
+version = "0.1.1"
+description = "Standalone recipe-driven PCB diagnostic fixture simulator and repair reports"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["pcb", "in-circuit-test", "bed-of-nails", "test-fixture", "repair", "diagnostics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Manufacturing",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: System :: Hardware",
+]
+dependencies = []
+
+[project.scripts]
+bed-of-nails = "bed_of_nails.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["bed_of_nails*"]
+
+[tool.setuptools.package-data]
+bed_of_nails = ["report.html", "demo-controller-rev-a.json"]

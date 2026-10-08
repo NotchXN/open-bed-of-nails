@@ -1,0 +1,9 @@
+run_id,serial_number,recipe_version,provenance,test_id,label,phase,status,value,unit,min,max,reason,measured_at
+24898b40-c0c5-4a24-a149-107c0b7ac63f,DEMO-0001,1.0.0,simulated,ground_continuity,Ground return continuity,unpowered,PASS,0.18,ohm,0,1,Within inclusive limits,2026-10-08T15:47:10.542676+00:00
+24898b40-c0c5-4a24-a149-107c0b7ac63f,DEMO-0001,1.0.0,simulated,supply_isolation,Supply-to-ground isolation signature,unpowered,PASS,18000.0,ohm,1000,1000000,Within inclusive limits,2026-10-08T15:47:10.542702+00:00
+24898b40-c0c5-4a24-a149-107c0b7ac63f,DEMO-0001,1.0.0,simulated,supply_current,Powered supply current,powered,PASS,38.4,mA,10,80,Within inclusive limits,2026-10-08T15:47:10.542732+00:00
+24898b40-c0c5-4a24-a149-107c0b7ac63f,DEMO-0001,1.0.0,simulated,rail_5v,5 V rail,powered,PASS,5.01,V,4.75,5.25,Within inclusive limits,2026-10-08T15:47:10.542752+00:00
+24898b40-c0c5-4a24-a149-107c0b7ac63f,DEMO-0001,1.0.0,simulated,rail_3v3,3.3 V rail,powered,FAIL,0.08,V,3.135,3.465,Outside inclusive limits,2026-10-08T15:47:10.542770+00:00
+24898b40-c0c5-4a24-a149-107c0b7ac63f,DEMO-0001,1.0.0,simulated,gpio_high,Logic buffer high output,functional,UNTESTED,,V,2.8,3.5,Prerequisites did not pass: rail_3v3,
+24898b40-c0c5-4a24-a149-107c0b7ac63f,DEMO-0001,1.0.0,simulated,gpio_low,Logic buffer low output,functional,UNTESTED,,V,0,0.4,Prerequisites did not pass: rail_3v3,
+24898b40-c0c5-4a24-a149-107c0b7ac63f,DEMO-0001,1.0.0,simulated,uart_loopback,Diagnostic UART echo,functional,UNTESTED,,bool,1,1,Prerequisites did not pass: rail_3v3,
