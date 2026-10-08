@@ -120,20 +120,6 @@ hardware/          Fixture requirements and conceptual OpenSCAD plate
 
 Read the [hardware plan](hardware/README.md), [recipe format](docs/recipe-format.md), [bench verification plan](docs/bench-verification.md), and [roadmap](docs/roadmap.md). The [validation record](docs/validation.md) lists checks performed and work still unverified.
 
-## Publish to GitHub
-
-Create an empty GitHub repository named `open-bed-of-nails`, configure your Git author identity, and run from this folder:
-
-```console
-git init --initial-branch=main
-git add .
-git commit -m "Initial standalone PCB fixture simulator"
-git remote add origin https://github.com/YOUR-USERNAME/open-bed-of-nails.git
-git push -u origin main
-```
-
-Replace `YOUR-USERNAME`. The working folder is initialized locally on `main`; the ZIP omits Git metadata. This build does not create a commit, remote repository, or public release.
-
 ## References and license
 
 The runner uses Python's standard library. [OpenHTF](https://github.com/google/openhtf) is an optional future integration for hardware test execution and instrument plugs; it is not a dependency of this release. Hardware planning references [RP2040 documentation](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf) and [Keysight's in-circuit testing overview](https://www.keysight.com/de/de/products/in-circuit-test-for-manufacturing/in-circuit-test-systems.html?weglotPrefLang=en).
